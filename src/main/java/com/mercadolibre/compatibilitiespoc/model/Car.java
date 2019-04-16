@@ -9,7 +9,7 @@ public class Car {
 
 	@Id
 	@GeneratedValue
-	private String id;
+	private Long id;
 	private String brand;
 	private String model;
 	private int year;
@@ -25,11 +25,11 @@ public class Car {
 	public Car() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

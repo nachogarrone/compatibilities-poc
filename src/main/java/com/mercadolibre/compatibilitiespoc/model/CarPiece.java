@@ -1,12 +1,14 @@
 package com.mercadolibre.compatibilitiespoc.model;
 
+import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
 import com.microsoft.spring.data.gremlin.annotation.Vertex;
 import org.springframework.data.annotation.Id;
 
 @Vertex
 public class CarPiece {
 	@Id
-	private String id;
+	@GeneratedValue
+	private Long id;
 
 	private String brand;
 	private String mpn;
@@ -14,17 +16,16 @@ public class CarPiece {
 	public CarPiece() {
 	}
 
-	public CarPiece(String id, String brand, String mpn) {
-		this.id = id;
+	public CarPiece(String brand, String mpn) {
 		this.brand = brand;
 		this.mpn = mpn;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

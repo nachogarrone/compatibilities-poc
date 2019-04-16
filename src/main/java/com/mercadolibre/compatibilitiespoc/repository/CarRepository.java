@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CarRepository extends GremlinRepository<Car, String> {
+public interface CarRepository extends GremlinRepository<Car, Long> {
 
 	Car findByBrandAndModelAndYearAndTrim(String brand, String model, int year, String trim);
 
