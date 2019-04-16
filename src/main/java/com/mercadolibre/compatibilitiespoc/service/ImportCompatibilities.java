@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import javax.annotation.PostConstruct;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class ImportCompatibilities {
 			try {
 				piece = carPieceRepository.findByBrandAndMpn(record.getCarPartBrand(), record.getCarPartMPN());
 			} catch (Exception e) {
-				piece = carPieceRepository.save(new CarPiece(record.getCarPartBrand(), record.getCarPartMPN()));
+				piece = carPieceRepository.save(new CarPiece(RandomStringUtils.random(6), record.getCarPartBrand(), record.getCarPartMPN()));
 			}
 
 			Car car;

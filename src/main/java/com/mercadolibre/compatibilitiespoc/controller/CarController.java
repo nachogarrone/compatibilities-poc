@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RestController
-//@RequestMapping("/car")
+@RestController
+@RequestMapping("/car")
 public class CarController {
 
 	private final CarRepository carRepository;
 
-//	@Autowired
+	@Autowired
 	public CarController(CarRepository carRepository) {
 		this.carRepository = carRepository;
 	}

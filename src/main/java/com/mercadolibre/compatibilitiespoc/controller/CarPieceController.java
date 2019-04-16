@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RestController
-//@RequestMapping("/piece")
+@RestController
+@RequestMapping("/piece")
 public class CarPieceController {
 
 	private CarPieceRepository carPieceRepository;
 
-	//@Autowired
+	@Autowired
 	public CarPieceController(CarPieceRepository carPieceRepository) {
 		this.carPieceRepository = carPieceRepository;
 	}
