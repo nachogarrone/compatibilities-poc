@@ -1,7 +1,6 @@
 package com.mercadolibre.compatibilitiespoc.model;
 
 import com.microsoft.spring.data.gremlin.annotation.EdgeSet;
-import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
 import com.microsoft.spring.data.gremlin.annotation.Graph;
 import com.microsoft.spring.data.gremlin.annotation.VertexSet;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import org.springframework.data.annotation.Id;
 public class Network {
 
 	@Id
-	@GeneratedValue
 	private String id;
 	@EdgeSet
 	private List<Object> edges;
