@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import javax.annotation.PostConstruct;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,18 +67,17 @@ public class ImportCompatibilities {
 		Network save = graphRepository.save(graph);
 		log.info("graph saved: {}", save.toString());
 
-		long count = 1L;
 		for (ImportDTO record : records) {// busca en la db o crea uno
 			try {
 				carPieceRepository.findByBrandAndMpn(record.getCarPartBrand(), record.getCarPartMPN());
 			} catch (Exception e) {
-				save.addVertex(new CarPiece(count++, record.getCarPartBrand(), record.getCarPartMPN()));
+				save.addVertex(new CarPiece(RandomStringUtils.random(6), record.getCarPartBrand(), record.getCarPartMPN()));
 			}
 
 			try {
 				carRepository.findByBrandAndModelAndYearAndTrim(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim());
 			} catch (Exception e) {
-				save.addVertex(new Car(count++, record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
+				save.addVertex(new Car(RandomStringUtils.random(6), record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
 			}
 
 			log.info("saving graph again: {}", save.toString());

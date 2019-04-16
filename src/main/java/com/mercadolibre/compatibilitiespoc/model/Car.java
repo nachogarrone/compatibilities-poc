@@ -7,13 +7,16 @@ import org.springframework.data.annotation.Id;
 public class Car {
 
 	@Id
-	private Long id;
+	private String id;
 	private String brand;
 	private String model;
 	private int year;
 	private String trim;
 
-	public Car(Long id, String brand, String model, int year, String trim) {
+	public Car() {
+	}
+
+	public Car(String id, String brand, String model, int year, String trim) {
 		this.id = id;
 		this.brand = brand;
 		this.model = model;
@@ -21,14 +24,11 @@ public class Car {
 		this.trim = trim;
 	}
 
-	public Car() {
-	}
-
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
