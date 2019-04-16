@@ -2,10 +2,11 @@ package com.mercadolibre.compatibilitiespoc.model;
 
 import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
 import com.microsoft.spring.data.gremlin.annotation.Vertex;
+import org.springframework.data.annotation.Id;
 
 @Vertex
 public class CarPiece {
-
+	@Id
 	@GeneratedValue
 	private Long id;
 
