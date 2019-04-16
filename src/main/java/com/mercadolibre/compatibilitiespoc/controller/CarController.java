@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/car")
 public class CarController {
 
+	private final CarRepository carRepository;
+
 	@Autowired
-	private CarRepository carRepository;
+	public CarController(CarRepository carRepository) {
+		this.carRepository = carRepository;
+	}
 
 	@GetMapping("/{brand}/{model}/{year}")
 	public List<Car> getCarCompatibilities(@PathVariable String brand, @PathVariable String model, @PathVariable Integer year) {
