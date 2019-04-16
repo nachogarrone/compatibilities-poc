@@ -63,6 +63,8 @@ public class ImportCompatibilities {
 
 		Network graph = new Network();
 		graph.setId("compats");
+		Network save = graphRepository.save(graph);
+		log.info("graph saved: {}", save);
 
 		records.forEach(record -> {
 
@@ -70,16 +72,16 @@ public class ImportCompatibilities {
 			try {
 				carPieceRepository.findByBrandAndMpn(record.getCarPartBrand(), record.getCarPartMPN());
 			} catch (Exception e) {
-				graph.addVertex(new CarPiece(record.getCarPartBrand(), record.getCarPartMPN()));
+				save.addVertex(new CarPiece(record.getCarPartBrand(), record.getCarPartMPN()));
 			}
 
 			try {
 				carRepository.findByBrandAndModelAndYearAndTrim(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim());
 			} catch (Exception e) {
-				graph.addVertex(new Car(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
+				save.addVertex(new Car(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
 			}
 
-			graphRepository.save(graph);
+			graphRepository.save(save);
 
 		});
 		log.info("[IMPORT] Finished import successfully!");
