@@ -63,7 +63,7 @@ public class ImportCompatibilities {
 		log.info("[IMPORT] Importing {} compatibilities.", records.size());
 
 		Network graph = new Network();
-		graph.setId("compats");
+		graph.setId(RandomStringUtils.randomAlphabetic(5));
 		Network save = graphRepository.save(graph);
 		log.info("graph saved: {}", save.toString());
 
