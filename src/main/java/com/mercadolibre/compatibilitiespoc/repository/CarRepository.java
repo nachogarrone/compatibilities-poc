@@ -4,8 +4,10 @@ import com.mercadolibre.compatibilitiespoc.model.Car;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CarRepository extends CrudRepository<Car, Long> {
+@Repository
+public interface CarRepository extends CrudRepository<Car, String> {
 
 	Optional<Car> findByBrandAndModelAndYearAndTrim(String brand, String model, int year, String trim);
 

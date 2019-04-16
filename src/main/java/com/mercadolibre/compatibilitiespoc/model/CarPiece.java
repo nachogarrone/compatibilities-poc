@@ -9,7 +9,7 @@ public class CarPiece {
 	@Id
 	@GeneratedValue
 	private String id;
-	
+
 	private String brand;
 	private String mpn;
 
@@ -19,6 +19,14 @@ public class CarPiece {
 	public CarPiece(String brand, String mpn) {
 		this.brand = brand;
 		this.mpn = mpn;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getBrand() {
