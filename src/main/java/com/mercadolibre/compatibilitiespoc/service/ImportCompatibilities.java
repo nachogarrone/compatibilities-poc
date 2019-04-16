@@ -50,7 +50,6 @@ public class ImportCompatibilities {
 	@PostConstruct
 	public void importCompats() {
 
-		graphRepository.deleteAll();
 		List<ImportDTO> records = new ArrayList<>();
 		log.info("[IMPORT] Staring import...");
 		ClassLoader classLoader = getClass().getClassLoader();
