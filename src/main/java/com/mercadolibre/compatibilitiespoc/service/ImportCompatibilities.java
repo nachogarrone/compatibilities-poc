@@ -64,26 +64,26 @@ public class ImportCompatibilities {
 		Network graph = new Network();
 		graph.setId("compats");
 		Network save = graphRepository.save(graph);
-		log.info("graph saved: {}", save);
+		log.info("graph saved: {}", save.toString());
 
-		records.forEach(record -> {
-
-			// busca en la db o crea uno
+		long count = 1L;
+		for (ImportDTO record : records) {// busca en la db o crea uno
 			try {
 				carPieceRepository.findByBrandAndMpn(record.getCarPartBrand(), record.getCarPartMPN());
 			} catch (Exception e) {
-				save.addVertex(new CarPiece(record.getCarPartBrand(), record.getCarPartMPN()));
+				save.addVertex(new CarPiece(count++, record.getCarPartBrand(), record.getCarPartMPN()));
 			}
 
 			try {
 				carRepository.findByBrandAndModelAndYearAndTrim(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim());
 			} catch (Exception e) {
-				save.addVertex(new Car(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
+				save.addVertex(new Car(count++, record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
 			}
 
+			log.info("saving graph again: {}", save.toString());
 			graphRepository.save(save);
 
-		});
+		}
 		log.info("[IMPORT] Finished import successfully!");
 		log.info("[IMPORT] -----------------------------");
 		log.info("[IMPORT] -----------------------------");

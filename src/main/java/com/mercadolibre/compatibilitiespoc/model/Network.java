@@ -45,4 +45,9 @@ public class Network {
 	public List<Object> getVertexes() {
 		return vertexes;
 	}
+
+	@Override
+	public String toString() {
+		return "Network{" + "id='" + id + '\'' + ", edges=" + edges + ", vertexes=" + vertexes + '}';
+	}
 }

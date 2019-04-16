@@ -1,6 +1,5 @@
 package com.mercadolibre.compatibilitiespoc.model;
 
-import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
 import com.microsoft.spring.data.gremlin.annotation.Vertex;
 import org.springframework.data.annotation.Id;
 
@@ -8,14 +7,14 @@ import org.springframework.data.annotation.Id;
 public class Car {
 
 	@Id
-	@GeneratedValue
 	private Long id;
 	private String brand;
 	private String model;
 	private int year;
 	private String trim;
 
-	public Car(String brand, String model, int year, String trim) {
+	public Car(Long id, String brand, String model, int year, String trim) {
+		this.id = id;
 		this.brand = brand;
 		this.model = model;
 		this.year = year;
