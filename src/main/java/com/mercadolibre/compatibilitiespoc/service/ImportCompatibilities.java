@@ -62,6 +62,7 @@ public class ImportCompatibilities {
 		log.info("[IMPORT] Importing {} compatibilities.", records.size());
 
 		Network graph = new Network();
+		graph.setId("compats");
 
 		records.forEach(record -> {
 
