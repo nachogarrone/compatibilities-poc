@@ -50,6 +50,7 @@ public class ImportCompatibilities {
 	@PostConstruct
 	public void importCompats() {
 
+		graphRepository.deleteAll();
 		List<ImportDTO> records = new ArrayList<>();
 		log.info("[IMPORT] Staring import...");
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -71,13 +72,13 @@ public class ImportCompatibilities {
 			try {
 				carPieceRepository.findByBrandAndMpn(record.getCarPartBrand(), record.getCarPartMPN());
 			} catch (Exception e) {
-				save.addVertex(new CarPiece(RandomStringUtils.random(6), record.getCarPartBrand(), record.getCarPartMPN()));
+				save.addVertex(new CarPiece(RandomStringUtils.randomAlphabetic(6), record.getCarPartBrand(), record.getCarPartMPN()));
 			}
 
 			try {
 				carRepository.findByBrandAndModelAndYearAndTrim(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim());
 			} catch (Exception e) {
-				save.addVertex(new Car(RandomStringUtils.random(6), record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
+				save.addVertex(new Car(RandomStringUtils.randomAlphabetic(6), record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
 			}
 
 			log.info("saving graph again: {}", save.toString());
