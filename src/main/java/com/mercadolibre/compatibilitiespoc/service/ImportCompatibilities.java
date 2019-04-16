@@ -61,16 +61,14 @@ public class ImportCompatibilities {
 			// busca en la db o crea uno
 			CarPiece piece;
 			try {
-				piece = carPieceRepository.findByBrandAndMpn(record.getCarPartBrand(), record.getCarPartMPN())
-						.get();
+				piece = carPieceRepository.findByBrandAndMpn(record.getCarPartBrand(), record.getCarPartMPN());
 			} catch (Exception e) {
 				piece = carPieceRepository.save(new CarPiece(record.getCarPartBrand(), record.getCarPartMPN()));
 			}
 
 			Car car;
 			try {
-				car = carRepository.findByBrandAndModelAndYearAndTrim(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim())
-						.get();
+				car = carRepository.findByBrandAndModelAndYearAndTrim(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim());
 			} catch (Exception e) {
 				car = new Car(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim());
 			}

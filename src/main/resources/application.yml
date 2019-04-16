@@ -1,0 +1,7 @@
+gremlin:
+  endpoint: compatibilities-poc.c6ybusbumvdx.us-east-1.neptune.amazonaws.com
+  port: 8182
+  username: your-username
+  password: your-password
+  sslEnabled: false
+  telemetryAllowed: false
