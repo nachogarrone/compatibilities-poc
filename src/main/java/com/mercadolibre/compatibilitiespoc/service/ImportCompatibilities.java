@@ -65,36 +65,40 @@ public class ImportCompatibilities {
 		Network graph = new Network();
 		graph.setId(RandomStringUtils.randomAlphabetic(5));
 		Network save = graphRepository.save(graph);
-		log.info("graph saved: {}", save.toString());
+		if (save != null) {
+			log.info("graph saved: {}", save.toString());
+			for (ImportDTO record : records) {// busca en la db o crea uno
+				try {
+					carPieceRepository.findByBrandAndMpn(record.getCarPartBrand(), record.getCarPartMPN());
+				} catch (Exception e) {
+					save.addVertex(new CarPiece(RandomStringUtils.randomAlphabetic(6), record.getCarPartBrand(), record.getCarPartMPN()));
+				}
 
-		for (ImportDTO record : records) {// busca en la db o crea uno
-			try {
-				carPieceRepository.findByBrandAndMpn(record.getCarPartBrand(), record.getCarPartMPN());
-			} catch (Exception e) {
-				save.addVertex(new CarPiece(RandomStringUtils.randomAlphabetic(6), record.getCarPartBrand(), record.getCarPartMPN()));
+				try {
+					carRepository.findByBrandAndModelAndYearAndTrim(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim());
+				} catch (Exception e) {
+					save.addVertex(new Car(RandomStringUtils.randomAlphabetic(6), record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
+				}
+
+				log.info("saving graph again: {}", save.toString());
+				graphRepository.save(save);
+
 			}
+			log.info("[IMPORT] Finished import successfully!");
+			log.info("[IMPORT] -----------------------------");
+			log.info("[IMPORT] -----------------------------");
 
-			try {
-				carRepository.findByBrandAndModelAndYearAndTrim(record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim());
-			} catch (Exception e) {
-				save.addVertex(new Car(RandomStringUtils.randomAlphabetic(6), record.getCarBrand(), record.getCarModel(), record.getCarYear(), record.getCarTrim()));
-			}
+			carRepository.findAll()
+					.forEach(c -> log.info(c.toString()));
+			log.info("[IMPORT] -----------------------------");
+			carPieceRepository.findAll()
+					.forEach(c -> log.info(c.toString()));
 
-			log.info("saving graph again: {}", save.toString());
-			graphRepository.save(save);
-
+			log.info("[IMPORT] -----------------------------");
+			log.info("[IMPORT] -----------------------------");
 		}
-		log.info("[IMPORT] Finished import successfully!");
-		log.info("[IMPORT] -----------------------------");
-		log.info("[IMPORT] -----------------------------");
+		log.info("graph not saved! {}", graph.toString());
 
-		carRepository.findAll()
-				.forEach(c -> log.info(c.toString()));
-		log.info("[IMPORT] -----------------------------");
-		carPieceRepository.findAll()
-				.forEach(c -> log.info(c.toString()));
 
-		log.info("[IMPORT] -----------------------------");
-		log.info("[IMPORT] -----------------------------");
 	}
 }
