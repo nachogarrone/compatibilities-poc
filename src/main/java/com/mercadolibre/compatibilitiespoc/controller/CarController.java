@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +33,12 @@ public class CarController {
 		carRepository.findAll()
 				.forEach(response::add);
 		return response;
+	}
+
+	@PutMapping("/{id}/{brand}/{model}/{year}/{trim}")
+	public Car addCar(@PathVariable String id, @PathVariable String brand, @PathVariable String model, @PathVariable Integer year, @PathVariable String trim) {
+		Car car = new Car(id, brand, model, year, trim);
+		return carRepository.save(car);
 	}
 
 	@GetMapping("/{brand}")
